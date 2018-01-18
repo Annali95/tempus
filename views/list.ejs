@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+    <form action = "search" method="post" class="w3-bar-item w3-button">     
+        <input id ="input1" type="text" placeholder="Enter User Name" name="search">
+        <button onclick = 'search()' type="submit">Submit</button>
+    </form>
+    <!-- Float links to the right. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="/doctor" class="w3-bar-item w3-button">All Patients</a>
+      <a href="/logout" class="w3-bar-item w3-button">Logout</a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <br> <br><br>                                                              
+  <div class="w3-card-4" style="width:100%">       
+  <div class="table-responsive">          
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% 
+    for(var i=0; i<data.length; i++) {
+    var route = "/appointment/" +  parseInt(data[i].id)%>
+    <tr><td><%= i+1 %></td><td><a href= <%= route %> ><%= data[i].name %></a></td></tr>
+    <% } %>
+    </tbody>
+  </table>
+  </div>
+  </div>
+</div>
+<script>
+  function search(){
+      var input = document.getElementById('input1').value;
+     console.log(input);
+  for(var i=0; i<data.length; i++){
+    console.log(data[i].name);
+  }  
+  // document.getElementById('search').action = "/appointment/1"+  ;
+
+  }
+</script>
+</body>
+</html>
+

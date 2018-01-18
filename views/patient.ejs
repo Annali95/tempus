@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Information</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel='stylesheet' href='/styles/css/index.css' />
+</head>
+
+<body>
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+    <div class="w3-right w3-hide-small">
+      <a href="/doctor" class="w3-bar-item w3-button">All Patients</a>
+      <a href="/logout" class="w3-bar-item w3-button">Logout</a>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <br><br><br>
+  <div class="w3-card-4" style="width:100%">
+      <header class="w3-container w3-light-grey">
+         <h3>Name: <%= data["name"] %></h3>
+      </header>
+      <div class="w3-container">
+        <p>Age: <%= data["age"] %> <br></p>
+        <p>Phone: <%= data["phone"] %><br></p>   
+        <p>Address: <%= data["mailing"] %><br></p>
+        <p>Email: <%= data["email"] %><br></p>  
+      </div>
+    <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-block w3-dark-grey" >Update</button>
+</div>
+  <br> 
+
+<div class="w3-card-4" style="width:100%">
+  <header class="w3-container w3-light-grey">
+    <h3>Appointment History</h3>
+  </header>   
+  <div class="table-responsive">          
+  <table class="table">
+    <thead>
+      <tr class = "w3-dark-grey">
+        <th >#</th>
+        <th>Time</th>
+        <th>Description</th>
+        <th>Doctor</th>
+        <th>Status</th>
+        <th>Message</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% 
+    for(var i=0; i<data["appointment"].length; i++) {
+     %>
+    <tr onclick='showDetails(<%= i %>, <%=  JSON.stringify(data["appointment"][i].date)%>,<%=  JSON.stringify(data["appointment"][i].desc)%>,<%=  JSON.stringify(data["appointment"][i].doctor)%>,<%=  JSON.stringify(data["appointment"][i].status)%>)'>
+      <td></td>
+      <td><%= data["appointment"][i].date %></td>
+      <td><%= data["appointment"][i].desc %></td>
+      <td><%= data["appointment"][i].doctor %></td>
+      <td><%= data["appointment"][i].status %></td>
+      <td><%= data["appointment"][i].message %></td>
+    </tr>
+    <% } %>
+    </tbody>
+  </table>
+  <button onclick="document.getElementById('id02').style.display='block'" class="w3-button w3-block w3-dark-grey" >New appointment</button>
+  </div>
+</div>
+</div>
+
+
+<div id="id01" class="modal">  
+  <form class="modal-content animate" method="POST" action="/updateinfo">
+
+    <div class="container">
+      <label>Name:</label>
+      <input type="text" class="input" placeholder="Enter Name" name="name" value=<%=data["name"]%> >
+      <label>Age:</label>
+      <input type="number" class="input" placeholder="Enter Age" name="age" value=<%=data["age"]%>>
+      <label >Email:</label>
+      <input type="email" class="input" placeholder="Enter email" name="email" value=<%=data["email"]%>>   
+      <label>Mailing address:</label>
+      <input type="text" class="input" placeholder="Enter Mailing address" name="mailing" value=<%=data["mailing"]%>>
+      <label>Phone:</label>
+      <input type="text" class="input" placeholder="Enter Phone Number(US)" name="phone" value=<%=data["phone"]%>>
+      <input type="hidden" name="id" value=<%= data["id"]%> />
+      <button type="submit" >Submit</button>
+    </div>
+  </form>
+</div>
+
+
+<div id="id02" class="modal"> 
+  <form class="modal-content animate" method="POST" action="/appointment">
+    <div class="container">
+      <label>Purpose/subject:</label>
+      <input type="text" class="input" placeholder="Enter Purpose" name="desc">
+      <label>Date and time:</label>
+      <input type="date" class="input" name="date">
+      <label>Name of doctor to be seen:</label>
+      <input type="text" class="input" placeholder="Enter Name of doctor" name="doctor">
+      <input type="hidden" name="status" value="Pending" />
+    <button type="submit" >Submit</button>
+    </div>
+  </form>
+</div>
+
+
+<div id="id03" class="modal">
+  <form id = "form1"class="modal-content animate" method="POST" action="/appointment">
+    <div class="container">
+      <label>Date and time:</label>
+      <input type="date" class="input" id="detail1" name="date">
+      <label>Purpose/subject:</label>
+      <input type="text" class="input" id="detail2"   name="desc">
+      <label>Name of doctor to be seen:</label>
+      <input type="text" class="input"" id="detail3"  name="doctor">   
+      <input type="hidden" name="status" id="detail4" >
+
+    <button type="submit" >Submit</button>
+    </div>
+  </form>
+</div>
+<script>
+  function showDetails(index, d1="",d2="",d3="",d4="",d5=""){
+  document.getElementById('id03').style.display='block'
+  document.getElementById("detail1").value = d1;
+  document.getElementById("detail2").value = d2;
+  document.getElementById("detail3").value = d3;
+  document.getElementById("detail4").value = d4;
+
+  document.getElementById('form1').action = "/appointment/"+<%= data["id"] %>+'/' + index ;
+
+  }
+</script>
+
+
+<script>
+var modal1 = document.getElementById('id01');
+var modal2 = document.getElementById('id02');
+var modal3 = document.getElementById('id03');
+
+window.onclick = function(event) {
+  event.target.display = "none";
+    if (event.target == modal1 ){
+        modal1.style.display = "none";
+    }
+    else if (event.target == modal2 ){
+        modal2.style.display = "none";
+    }
+    else if (event.target == modal3 ){
+        modal3.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>
+
+
+
