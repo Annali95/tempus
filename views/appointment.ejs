@@ -31,6 +31,29 @@
 </div>
   <br> 
 <div class="w3-card-4" style="width:100%">
+    <header class="w3-container w3-light-grey">
+       <h3>Medical record</h3>
+    </header>
+  <table class="table">
+    <tbody>
+    <% 
+    for(var i=0; i<files.length; i++) {
+     %>
+    <tr>
+      <td><%= files[i] %></td>
+      <td><a href=<%= '/attachfile/'+data["id"]+'/'+files[i] %>>Delete</a></td>
+
+    </tr>
+    <% } %>
+    </tbody>
+  </table>
+
+    <button onclick="document.getElementById('id04').style.display='block'" class="w3-button w3-block w3-dark-grey" >Attach files</button>
+  </div>
+</div>
+<br> 
+
+<div class="w3-card-4" style="width:100%">
   <header class="w3-container w3-light-grey">
       <h3>Appointment History</h3>
 
@@ -111,6 +134,16 @@
   </form>
 </div>
 
+<div id="id04" class="modal">
+  <form id = "form4"class="modal-content animate" method="POST" enctype="multipart/form-data">
+    <div class="container">
+      <label>Files</label>
+      <input type="file" class="input" name="filetoupload">
+    <button onclick ='attach()' type="submit" >Submit</button>
+    </div>
+  </form>
+</div>
+
 <script>
   function showDetails(index, d1="",d2="",d3="",d4="",d5=""){
     document.getElementById('id01').style.display='block'
@@ -121,6 +154,13 @@
   document.getElementById('form1').action = "/appointment/"+ parseInt(<%= data["id"] %>)+'/' + index ;
   }
 </script>
+
+<script>
+  function attach(){
+  document.getElementById('form4').action = "/attachfile/"+ parseInt(<%= data["id"] %>);
+  }
+</script>
+
 <script>
   function makeAppointment(){
   document.getElementById('id02').style.display='block'
@@ -131,7 +171,7 @@
 <script>
 var modal1 = document.getElementById('id01');
 var modal2 = document.getElementById('id02');
-
+var modal3 = document.getElementById('id04');
 window.onclick = function(event) {
 
     event.target.display = "none";
@@ -140,6 +180,9 @@ window.onclick = function(event) {
     }
     else if (event.target == modal2 ){
         modal2.style.display = "none";
+    }
+    else if (event.target == modal3 ){
+        modal3.style.display = "none";
     }
 
 }

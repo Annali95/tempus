@@ -36,6 +36,25 @@
     <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-block w3-dark-grey" >Update</button>
 </div>
   <br> 
+<div class="w3-card-4" style="width:100%">
+    <header class="w3-container w3-light-grey">
+       <h3>Medical record</h3>
+    </header>
+  <table class="table">
+    <tbody>
+    <% 
+    for(var i=0; i<files.length; i++) {
+     %>
+    <tr>
+      <td><%= files[i] %></td>
+    </tr>
+    <% } %>
+    </tbody>
+  </table>
+
+    <button onclick="document.getElementById('id04').style.display='block'" class="w3-button w3-block w3-dark-grey" >Attach files</button>
+  </div>
+</div>
 
 <div class="w3-card-4" style="width:100%">
   <header class="w3-container w3-light-grey">
@@ -126,6 +145,17 @@
     </div>
   </form>
 </div>
+
+<div id="id04" class="modal">
+  <form id = "form1"class="modal-content animate" method="POST" action="/attachfile" enctype="multipart/form-data">
+    <div class="container">
+      <label>Files</label>
+      <input type="file" class="input" name="filetoupload">
+    <button type="submit" >Submit</button>
+    </div>
+  </form>
+</div>
+
 <script>
   function showDetails(index, d1="",d2="",d3="",d4="",d5=""){
   document.getElementById('id03').style.display='block'
@@ -144,6 +174,7 @@
 var modal1 = document.getElementById('id01');
 var modal2 = document.getElementById('id02');
 var modal3 = document.getElementById('id03');
+var modal4 = document.getElementById('id04');
 
 window.onclick = function(event) {
   event.target.display = "none";
@@ -155,6 +186,9 @@ window.onclick = function(event) {
     }
     else if (event.target == modal3 ){
         modal3.style.display = "none";
+    }
+    else if (event.target == modal4 ){
+        modal4.style.display = "none";
     }
 }
 </script>

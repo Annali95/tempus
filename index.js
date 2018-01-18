@@ -16,6 +16,8 @@ var fs = require("fs");
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser');
 var session      = require('express-session');
+var formidable = require('formidable');
+
 // Init App
 var app = express();
 
@@ -114,10 +116,19 @@ app.post('/search', function (req, res) {
 //Doctor's appointment with every patient
 app.get('/appointment/:id', function (req, res) {
 　　if(req.session.user && req.session.user.type == 0){   
+      var Folder = __dirname + "/files/user" + req.params.id;
+      var filesname = [];
+      fs.readdir(Folder, (err, files) => {
+        files.forEach(file => {
+         filesname.push(file);
+        });
+      })     
+
+
      fs.readFile( __dirname + '/user.json', 'utf8', function (err, data) {
         var users = JSON.parse( data );
         var user = users["user" + req.params.id] 
-        res.render('appointment', { data: user });
+        res.render('appointment', { data: user, files:filesname});
      });
     }
     else{
@@ -136,7 +147,7 @@ app.post('/appointment/:id', function (req, res) {
        var user = data["user" + req.params.id];
        user["appointment"].push(req.body);
        data["user" + req.params.id] = user;
-       res.render('appointment',{data:user})
+       res.redirect('/appointment/'+req.params.id);
        fs.writeFile(__dirname + '/user.json', JSON.stringify(data) , function(err) {
         if(err) {
           return console.log(err);
@@ -153,7 +164,8 @@ app.post('/appointment/:id/:index', function (req, res) {
       var user = data["user" + req.params.id] 
       user["appointment"][req.params.index] = req.body
       data["user" + req.params.id] = user
-      res.render('appointment', { data: user });
+
+      res.redirect('/appointment/'+req.params.id);
 
       fs.writeFile(__dirname + '/user.json', JSON.stringify(data) , function(err) {
         if(err) {
@@ -170,11 +182,22 @@ app.post('/appointment/:id/:index', function (req, res) {
 //patient's information and appointment history 
 app.get('/patient', (req, res) => {
 　　if(req.session.user && req.session.user.type == 1){
+      var Folder = __dirname + "/files/"+ req.session.user.id;
+      var filesname = [];
+      fs.readdir(Folder, (err, files) => {
+        files.forEach(file => {
+         filesname.push(file);
+        });
+      })   
+
       fs.readFile( __dirname + '/user.json', 'utf8', function (err, data) {
           var users = JSON.parse( data );
           var user = users[req.session.user.id];
-          res.render('patient', { data: user });
-       });　　
+          res.render('patient', { data: user, files:filesname });
+       });　
+
+
+      　
     }else{
 　　　　req.session.error = "Please login first"
 　　　　res.redirect('/');
@@ -220,6 +243,54 @@ app.post('/appointment', function (req, res) {
    });
    　　　　res.redirect('/patient');
 
+})
+
+//Files
+app.post('/attachfile', function (req, res) {
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+      var oldpath = files.filetoupload.path;
+      var newpath = __dirname + "/files/"+ req.session.user.id+ "/";
+      if (!fs.existsSync(newpath)){
+         fs.mkdirSync(newpath);
+      }
+      console.log(oldpath);
+      console.log(newpath);
+      var newpath = newpath+files.filetoupload.name;
+
+      fs.copyFile(oldpath, newpath, function (err) {
+        if (err) throw err;
+   　　　res.redirect('/patient');
+      });
+ });
+})
+
+//Files
+app.post('/attachfile/:id', function (req, res) {
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+      var oldpath = files.filetoupload.path;
+      var newpath = __dirname + "/files/user"+ req.params.id;
+      if (!fs.existsSync(newpath)){
+         fs.mkdirSync(newpath);
+      }
+      console.log(oldpath);
+      console.log(newpath);
+      var newpath = newpath+files.filetoupload.name;
+
+      fs.copyFile(oldpath, newpath, function (err) {
+        if (err) throw err;
+   　　　res.redirect('/appointment/'+req.params.id);
+      });
+ });
+})
+
+app.get('/attachfile/:id/:filename', function (req, res) {
+  var filepath = __dirname + "/files/user"+ req.params.id+"/"+req.params.filename;
+  fs.unlink(filepath, function (err) {
+    if (err) throw err;
+　　　res.redirect('/appointment/'+req.params.id);
+  });
 })
 
 
