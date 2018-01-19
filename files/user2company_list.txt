@@ -1,0 +1,321 @@
+name
+3m
+8x8
+a10 networks
+abaxis
+accuray
+adap.tv
+adobe
+advanced micro devices
+advent software
+aemetis
+aetna
+affirm
+affymetrix
+agilent technologies
+agrible
+airbnb
+akamai
+akamai technologies
+alere
+align technology
+altera
+altiscale
+amazon
+amazon - 126lab
+amazon - a9
+amazon - audible
+amazon - twitch
+american express 
+anheuser-busch inbev
+aol
+appdirect
+appfolio
+apple
+applied materials
+applied micro circuits
+arista networks inc
+aruba networks
+atmel
+autodesk
+avant
+aviat networks
+barracuda networks
+bazaarvoice
+belvedere trading
+bio-rad laboratories
+bioanalytics, inc.
+blizzard
+bloomberg
+bloomreach
+boeing
+box.com
+braintree
+brocade communications
+cadence design systems
+cars.com
+cavium
+cepheid
+chartboost
+chegg
+cisco
+cisco systems
+citadel
+citrix
+clever
+cleversafe
+cloudera
+cme group
+co. name
+coherent
+com
+com inc
+concur
+counsyl recruiting
+coupons
+coursera
+cummins
+cypress semiconductor
+d.e. shaw research
+d.e. shaw
+databricks.com
+datarobot
+dell
+deloitte
+depomed
+dolby laboratories
+dropbox
+dupont pioneer
+ea eletronics arts
+ebay
+eharmony
+electronic arts
+electronics for imaging
+emc
+ensighten
+epic
+eplus
+equinix
+esi
+esri
+evernote
+expedia
+extreme networks
+facebook
+fair isaac
+fairchild semiconductor
+fidessa
+finisar
+fireeye
+fitbit
+formfactor
+fortinet
+foursquare
+freescale
+garmin international
+genomic health
+gigamon
+gilead sciences
+github
+glassdoor
+glu mobile
+godaddy
+google
+google - youtube
+gopro inc
+grassbridge-llc
+groupon
+guidewire software
+harmonic
+heap
+hp
+hulu
+ibm
+impax laboratories
+imperva
+indeed
+infinera
+infoblox
+informatica
+infoscout
+inphi
+ins
+integrated device technology
+integrated silicon solution
+intel
+interactive intelligence 
+intersil
+intuit
+intuitive surgical
+invensense
+ixl learning
+ixys
+jds uniphase
+jive
+jive software
+jp morgan
+juniper networks
+kcura
+kla-tencor
+kosei
+lake shore cryotronics
+lam research
+leapfrog enterprises
+lendingclub
+liaison
+liaison technologies
+liferay
+linear technology
+linkedin
+lyft
+lynx
+marketo
+massmutual financial group
+mathswork
+mattson technology
+maxim integrated products
+medallia
+medivation
+meetup
+micrel
+microsoft
+mongodb
+monolithic power systems
+morgan stanley
+motorola
+mozilla
+mulesoft
+nanometrics
+natus medical
+nektar therapeutics
+neophotonics
+netapp
+netflix
+netgear
+netsuite
+neustar, inc.
+nextcapital
+nimble storage
+noom
+nvidia
+oclaro
+omnicell
+omnivision technologies
+ondeck
+oracle
+orbitz
+palantir
+palo alto networks
+pandora media
+parallel machines
+paypal
+pearson
+pharmacyclics
+pinterest
+pmc - sierra
+pocket gems
+pocketgem
+polycom
+power integrations
+precyse
+procter and gamble
+proofpoint
+qualcomm
+quantcast
+quantlab financial llc
+quantum
+quinstreet
+qumulo
+quora
+rackspace
+rambus
+raytheon
+redfin
+redhat
+reflektion
+ringcentral
+riverbed
+riverbed technology
+rocket fuel
+rovi
+ruckus wireless
+sabre
+salesforce
+sandisk
+sanmina-sci
+sap (stat)
+sears
+secondstreet
+servicenow
+servicesource
+shoretel
+shutterfly
+sigma designs
+silicon graphics
+silver spring networks
+skyhigh
+skype
+snapchat
+solarcity
+splunk
+spothere
+sprout social
+square
+starbucks
+storm8
+sunpower
+super micro computer
+swiftstack
+symantec
+synaptics
+synnex
+synopsys
+tableau
+tango
+taser international
+teradata
+tesla motors
+tessera technologies
+thoratec
+tivo
+trimble navigation
+tripadvisor
+truepad
+trulia
+turn
+twilio
+twitter
+twosigma
+uber
+ubiquiti networks
+ultra clean
+ultratech
+under armour
+varian medical systems
+vectorworks
+veeva systems
+verifone systems
+vertica
+vmware
+wageworks
+walmart labs
+wealthfront
+whitepages
+wikimedia
+wish
+wolfram research
+workday
+xilinx
+yahoo
+yammer
+yelp
+yume
+zeltiq aesthetics
+zenefits
+zensight
+zillow
+zulily
+zynga
+乐天
+咨询BIG 3： mckinsey & co., boston consulting group (bcg). bain & co
+四大会计师事务所

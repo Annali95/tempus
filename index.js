@@ -115,7 +115,7 @@ app.post('/search', function (req, res) {
 
 //Doctor's appointment with every patient
 app.get('/appointment/:id', function (req, res) {
-　　if(req.session.user && req.session.user.type == 0){   
+　　if(req.session.user && (req.session.user.type == 0 || req.session.user.id == "user"+req.params.id ) ){   
       var Folder = __dirname + "/files/user" + req.params.id;
       var filesname = [];
       fs.readdir(Folder, (err, files) => {
@@ -157,7 +157,7 @@ app.post('/appointment/:id', function (req, res) {
    });
 })
 
-//Doctor update appointment
+// update appointment
 app.post('/appointment/:id/:index', function (req, res) {
    fs.readFile( __dirname + '/user.json', 'utf8', function (err, data) {
       data = JSON.parse( data );
@@ -179,7 +179,7 @@ app.post('/appointment/:id/:index', function (req, res) {
 
 
 
-//patient's information and appointment history 
+//get patient's information and appointment history 
 app.get('/patient', (req, res) => {
 　　if(req.session.user && req.session.user.type == 1){
       var Folder = __dirname + "/files/"+ req.session.user.id;
@@ -195,8 +195,6 @@ app.get('/patient', (req, res) => {
           var user = users[req.session.user.id];
           res.render('patient', { data: user, files:filesname });
        });　
-
-
       　
     }else{
 　　　　req.session.error = "Please login first"
@@ -205,7 +203,7 @@ app.get('/patient', (req, res) => {
 
 })
 
-//Patient update information
+// update Patient information
 app.post('/updateinfo', function (req, res) {
    // First read existing users.
    fs.readFile( __dirname + '/user.json', 'utf8', function (err, data) {
@@ -219,7 +217,6 @@ app.post('/updateinfo', function (req, res) {
        	}
        	console.log("The file was saved!");
        }); 
-       console.log(req.session.user);
 　　　　res.redirect('/patient');
 
    });
@@ -241,9 +238,10 @@ app.post('/appointment', function (req, res) {
        	console.log("The file was saved!");
        }); 
    });
-   　　　　res.redirect('/patient');
+   　res.redirect('/patient');
 
 })
+
 
 //Files
 app.post('/attachfile', function (req, res) {
@@ -265,19 +263,18 @@ app.post('/attachfile', function (req, res) {
  });
 })
 
-//Files
+//doctor upload Files for patient
 app.post('/attachfile/:id', function (req, res) {
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
       var oldpath = files.filetoupload.path;
-      var newpath = __dirname + "/files/user"+ req.params.id;
+      var newpath = __dirname + "/files/user"+ req.params.id+ "/";
       if (!fs.existsSync(newpath)){
          fs.mkdirSync(newpath);
       }
       console.log(oldpath);
-      console.log(newpath);
+      console.log(newpath)
       var newpath = newpath+files.filetoupload.name;
-
       fs.copyFile(oldpath, newpath, function (err) {
         if (err) throw err;
    　　　res.redirect('/appointment/'+req.params.id);
