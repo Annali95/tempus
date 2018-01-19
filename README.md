@@ -27,6 +27,6 @@ I didn't use any database for the app because I'm confused by "All data should b
  Username for doctor: doctor 
  Password: 1234
  
- Username for pathent: doctor 
+ Username for patient: patient 
  Password: 1234
 
