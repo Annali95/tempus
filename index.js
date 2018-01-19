@@ -1,15 +1,15 @@
-  var user={
+var user={
 　　　　username:'doctor',
 　　　　password:'1234',
-       id:'user1',
-       type:0
-   }
-  var user1={
+     id:'user1',
+     type:0
+ }
+var user1={
 　　　　username:'patient',
 　　　　password:'1234',
-       id:'user2',
-       type:1
-   }
+     id:'user2',
+     type:1
+ }
 
 var express = require('express');
 var fs = require("fs");
@@ -50,7 +50,6 @@ app.listen(3000, function() {
 
 
 //login and logout
-
 app.get('/', (req, res) => {
   res.render('login');
 })
@@ -74,6 +73,9 @@ app.post('/login', (req, res) => {
 　　}
 })
 
+
+
+
 //Doctor's patient list
 app.get('/doctor', function (req, res) {
 
@@ -93,6 +95,7 @@ app.get('/doctor', function (req, res) {
 
 })
 
+//Search patient by name
 app.post('/search', function (req, res) {
 　　if(req.session.user && req.session.user.type == 0){
      fs.readFile( __dirname + '/user.json', 'utf8', function (err, data) {
@@ -157,7 +160,7 @@ app.post('/appointment/:id', function (req, res) {
    });
 })
 
-// update appointment
+// update appointment(both for doction and patient)
 app.post('/appointment/:id/:index', function (req, res) {
    fs.readFile( __dirname + '/user.json', 'utf8', function (err, data) {
       data = JSON.parse( data );
@@ -252,8 +255,6 @@ app.post('/attachfile', function (req, res) {
       if (!fs.existsSync(newpath)){
          fs.mkdirSync(newpath);
       }
-      console.log(oldpath);
-      console.log(newpath);
       var newpath = newpath+files.filetoupload.name;
 
       fs.copyFile(oldpath, newpath, function (err) {
@@ -272,8 +273,6 @@ app.post('/attachfile/:id', function (req, res) {
       if (!fs.existsSync(newpath)){
          fs.mkdirSync(newpath);
       }
-      console.log(oldpath);
-      console.log(newpath)
       var newpath = newpath+files.filetoupload.name;
       fs.copyFile(oldpath, newpath, function (err) {
         if (err) throw err;
@@ -281,7 +280,7 @@ app.post('/attachfile/:id', function (req, res) {
       });
  });
 })
-
+//delete attached Files 
 app.get('/attachfile/:id/:filename', function (req, res) {
   var filepath = __dirname + "/files/user"+ req.params.id+"/"+req.params.filename;
   fs.unlink(filepath, function (err) {
